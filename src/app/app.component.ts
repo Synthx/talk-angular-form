@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -9,10 +9,18 @@ import { MatInputModule } from '@angular/material/input';
     selector: 'app-root',
     templateUrl: './app.component.html',
     styleUrls: ['./app.component.scss'],
-    imports: [FormsModule, MatFormFieldModule, MatButtonModule, MatInputModule],
+    imports: [ReactiveFormsModule, MatFormFieldModule, MatButtonModule, MatInputModule],
 })
 export class AppComponent {
-    save(value: any): void {
-        console.info('value', value);
+    formGroup = this.fb.group({
+        email: '',
+        password: '',
+        nickname: '',
+    });
+
+    constructor(private readonly fb: FormBuilder) {}
+
+    save(): void {
+        console.info('value', this.formGroup.value);
     }
 }
