@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -13,9 +13,9 @@ import { MatInputModule } from '@angular/material/input';
 })
 export class AppComponent {
     formGroup = this.fb.group({
-        email: '',
-        password: '',
-        nickname: '',
+        email: ['', [Validators.required, Validators.email, Validators.maxLength(255)]],
+        password: ['', [Validators.required, Validators.minLength(12), Validators.maxLength(255)]],
+        nickname: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(255)]],
     });
 
     constructor(private readonly fb: FormBuilder) {}

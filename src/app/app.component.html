@@ -11,5 +11,5 @@
         <mat-label>Nickname</mat-label>
         <input formControlName="nickname" matInput />
     </mat-form-field>
-    <button color="primary" mat-flat-button type="submit">Register</button>
+    <button color="primary" mat-flat-button type="submit" [disabled]="formGroup.invalid">Register</button>
 </form>
