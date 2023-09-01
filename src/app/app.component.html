@@ -1,15 +1,13 @@
-<form [formGroup]="formGroup" (ngSubmit)="save()">
-    <mat-form-field>
-        <mat-label>Email</mat-label>
-        <input formControlName="email" matInput type="email" />
-    </mat-form-field>
-    <mat-form-field>
-        <mat-label>Password</mat-label>
-        <input formControlName="password" matInput type="password" />
-    </mat-form-field>
-    <mat-form-field>
-        <mat-label>Nickname</mat-label>
-        <input formControlName="nickname" matInput />
-    </mat-form-field>
-    <button color="primary" mat-flat-button type="submit">Register</button>
-</form>
+<div class="h-full p-10 flex flex-col items-center justify-center">
+    <div class="flex items-start gap-4">
+        <mat-form-field>
+            <mat-label>Keyword</mat-label>
+            <input matInput [formControl]="control" />
+        </mat-form-field>
+        <mat-spinner class="!w-[30px] !h-[30px]" color="primary" *ngIf="loading$ | async" />
+    </div>
+    <div class="flex flex-col items-center" *ngIf="pokemon$ | async as pokemon">
+        <img height="200" width="200" [alt]="pokemon.name" [ngSrc]="pokemon.sprites.front_default" />
+        <div class="uppercase text-center">{{ pokemon.name }}</div>
+    </div>
+</div>
