@@ -1,0 +1,15 @@
+<form #formGroup="ngForm" (ngSubmit)="save(formGroup.value)">
+  <mat-form-field>
+    <mat-label>Email</mat-label>
+    <input email matInput maxlength="255" name="email" ngModel required type="email"/>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Password</mat-label>
+    <input matInput maxlength="255" minlength="12" name="password" ngModel required type="password"/>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-label>Nickname</mat-label>
+    <input matInput maxlength="255" minlength="4" name="nickname" ngModel required type="text"/>
+  </mat-form-field>
+  <button color="primary" mat-flat-button type="submit" [disabled]="formGroup.invalid">Register</button>
+</form>
