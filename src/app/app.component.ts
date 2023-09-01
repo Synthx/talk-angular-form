@@ -1,10 +1,10 @@
 import { AsyncPipe, JsonPipe, NgIf, NgOptimizedImage } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, debounceTime, distinctUntilChanged, switchMap } from 'rxjs';
 import { Pokemon } from './pokemon.model';
 import { PokemonService } from './pokemon.service';
 
@@ -26,7 +26,7 @@ import { PokemonService } from './pokemon.service';
     providers: [PokemonService],
 })
 export class AppComponent implements OnInit {
-    control = this.fb.control('');
+    control = this.fb.control('', [Validators.required]);
 
     loading$ = new BehaviorSubject<boolean>(false);
     pokemon$ = new BehaviorSubject<Pokemon | undefined>(undefined);
@@ -46,6 +46,15 @@ export class AppComponent implements OnInit {
             this.loading$.next(false);
         });
 
-        // todo: listen keywordControl changes and update pokemon
+        // listen keywordControl changes and update pokemon
+        this.control.valueChanges
+            .pipe(
+                debounceTime(500),
+                distinctUntilChanged(),
+                switchMap(id => this.pokemonService.findById(id as string)),
+            )
+            .subscribe(pokemon => {
+                this.pokemon$.next(pokemon);
+            });
     }
 }
