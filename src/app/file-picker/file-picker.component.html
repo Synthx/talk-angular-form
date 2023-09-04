@@ -1,0 +1,19 @@
+<div class="file-picker">
+    <input #fileInput class="file-picker-input" type="file" (change)="filesSelected($event.target)" />
+    <div class="file-picker-label">
+        <div class="file-picker-label-header">
+            <span>Télécharger vos pièces jointes (txt, doc, jpg, gif, pdf)</span>
+            <button color="primary" mat-mini-fab type="button" (click)="fileInput.click()">
+                <mat-icon>file_upload</mat-icon>
+            </button>
+        </div>
+        <div class="file-picker-label-files">
+            <div class="file-picker-label-files-item" *ngFor="let file of files; let index = index">
+                <span>{{ file.name }} ({{ file.size | fileSize }})</span>
+                <button mat-icon-button type="button" (click)="removeFileAt(index)">
+                    <mat-icon>clear</mat-icon>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

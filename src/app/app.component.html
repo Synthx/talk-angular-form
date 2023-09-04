@@ -1,15 +1,6 @@
 <form [formGroup]="formGroup" (ngSubmit)="save()">
-    <mat-form-field>
-        <mat-label>Email</mat-label>
-        <input formControlName="email" matInput type="email" />
-    </mat-form-field>
-    <mat-form-field>
-        <mat-label>Password</mat-label>
-        <input formControlName="password" matInput type="password" />
-    </mat-form-field>
-    <mat-form-field>
-        <mat-label>Nickname</mat-label>
-        <input formControlName="nickname" matInput />
-    </mat-form-field>
-    <button color="primary" mat-flat-button type="submit">Register</button>
+    <file-picker />
+    <color-picker formControlName="color" />
+    <button color="primary" mat-flat-button type="submit" [disabled]="formGroup.invalid">Register</button>
+    <pre>{{ formGroup.value | json }}</pre>
 </form>

@@ -1,0 +1,10 @@
+<div class="color-picker">
+    <button
+        class="color-picker-button"
+        type="button"
+        [class.selected]="color === selectedColor"
+        [style.background-color]="color"
+        (click)="selectColor(color)"
+        *ngFor="let color of colors"
+    ></button>
+</div>

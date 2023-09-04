@@ -1,0 +1,31 @@
+.color-picker {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    padding: 15px;
+    border: 1px solid #0400374c;
+    border-radius: 8px;
+
+    &-button {
+        position: relative;
+        height: 40px;
+        width: 40px;
+        border: 1px solid lightgray;
+        border-radius: 50%;
+
+        &.selected {
+            &::after {
+                position: absolute;
+                left: 16px;
+                bottom: 11px;
+                content: '';
+                height: 17px;
+                width: 6px;
+                border-bottom: 2px solid white;
+                border-right: 2px solid white;
+                transform: rotate(45deg);
+            }
+        }
+    }
+}
