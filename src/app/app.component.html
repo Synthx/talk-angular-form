@@ -1,5 +1,5 @@
 <form [formGroup]="formGroup" (ngSubmit)="save()">
-    <file-picker />
+    <file-picker formControlName="files" />
     <color-picker formControlName="color" />
     <button color="primary" mat-flat-button type="submit" [disabled]="formGroup.invalid">Register</button>
     <pre>{{ formGroup.value | json }}</pre>
