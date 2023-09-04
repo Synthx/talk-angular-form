@@ -1,15 +1,68 @@
 <form [formGroup]="formGroup" (ngSubmit)="save()">
     <mat-form-field>
-        <mat-label>Email</mat-label>
-        <input formControlName="email" matInput type="email" />
-    </mat-form-field>
-    <mat-form-field>
-        <mat-label>Password</mat-label>
-        <input formControlName="password" matInput type="password" />
-    </mat-form-field>
-    <mat-form-field>
         <mat-label>Nickname</mat-label>
-        <input formControlName="nickname" matInput />
+        <input autocomplete="username" formControlName="nickname" matInput />
+        <mat-spinner
+            class="!w-[24px] !h-[24px]"
+            color="primary"
+            matIconSuffix
+            *ngIf="formGroup.controls.nickname.pending"
+        />
+        <mat-error *ngIf="getErrorMessage(formGroup.controls.nickname) as message">
+            {{ message }}
+        </mat-error>
     </mat-form-field>
-    <button color="primary" mat-flat-button type="submit" [disabled]="formGroup.invalid">Register</button>
+    <mat-form-field>
+        <mat-label>Email</mat-label>
+        <input autocomplete="email" formControlName="email" matInput type="email" />
+        <mat-spinner
+            class="!w-[24px] !h-[24px]"
+            color="primary"
+            matIconSuffix
+            *ngIf="formGroup.controls.nickname.pending"
+        />
+        <mat-error *ngIf="getErrorMessage(formGroup.controls.email) as message">
+            {{ message }}
+        </mat-error>
+    </mat-form-field>
+    <ng-container [formGroup]="passwordGroup" *ngIf="formGroup.controls.password as passwordGroup">
+        <mat-form-field>
+            <mat-label>Password</mat-label>
+            <input autocomplete="new-password" formControlName="value" matInput type="password" />
+            <mat-error *ngIf="getErrorMessage(passwordGroup.controls.value) as message">
+                {{ message }}
+            </mat-error>
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>Confirm Password</mat-label>
+            <input autocomplete="new-password" formControlName="confirmation" matInput type="password" />
+            <mat-error *ngIf="getErrorMessage(passwordGroup.controls.confirmation) as message">
+                {{ message }}
+            </mat-error>
+        </mat-form-field>
+    </ng-container>
+    <mat-form-field>
+        <mat-label>Sex</mat-label>
+        <mat-select formControlName="sex">
+            <mat-option value="MALE">Male</mat-option>
+            <mat-option value="FEMALE">Female</mat-option>
+            <mat-option value="OTHER">Other</mat-option>
+        </mat-select>
+        <mat-error *ngIf="getErrorMessage(formGroup.controls.sex) as message">
+            {{ message }}
+        </mat-error>
+    </mat-form-field>
+    <mat-form-field>
+        <mat-label>Birth Date</mat-label>
+        <input autocomplete="bday" formControlName="birthDate" matInput type="date" />
+        <mat-error *ngIf="getErrorMessage(formGroup.controls.birthDate) as message">
+            {{ message }}
+        </mat-error>
+    </mat-form-field>
+    <button color="primary" mat-flat-button type="submit" [disabled]="formGroup.invalid || formGroup.pending">
+        Register
+    </button>
+    <pre>
+      {{ formGroup.value | json }}
+    </pre>
 </form>

@@ -1,7 +1,15 @@
 form {
+    padding: 40px;
     margin: auto;
     max-width: 440px;
     display: flex;
     flex-direction: column;
     gap: 10px;
+}
+
+pre {
+    background-color: #000000;
+    color: #ffffff;
+    padding: 10px;
+    border-radius: 10px;
 }
